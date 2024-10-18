@@ -1,0 +1,304 @@
+<templates>
+    <t t-name="crm_dashboard.CrmDashboard">
+        <div style="max-height: 100vh; overflow-y: auto; padding: 10px; justify-content:center;align-item:center; margin-left:30px;">
+            <div class="o_control_panel d-flex flex-column gap-3 px-3 pt-2 pb-3">
+                <div class="o_control_panel_main d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-lg-start gap-lg-3 flex-grow-1">
+                    <div class="o_control_panel_breadcrumbs d-flex align-items-center gap-1 order-0 h-lg-100">
+                        <div class="o_breadcrumb d-flex gap-1 text-truncate">
+                            <div class="o_last_breadcrumb_item active d-flex fs-4 min-w-0 align-items-center">
+                                <span class="min-w-0 text-truncate">
+                                    <h1>Crm Dashboard</h1>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_control_panel_actions d-empty-none d-flex align-items-center justify-content-start justify-content-lg-around order-2 order-lg-1 w-100 w-lg-auto">
+                        <div class="o-filter-value d-flex align-items-start w-100">
+                            <div class="w-100">
+                                <select id="filter"
+                                        class="date_filter_values o_input me-3"
+                                        t-on-change="onChangeFilter">
+                                    <option value="all">All</option>
+                                    <option value="today">Today</option>
+                                    <option value="this_week">This Week</option>
+                                    <option value="this_month">This Month
+                                    </option>
+                                    <option value="this_year">This Year</option>
+                                    <option value="previous_year">Previous
+                                        Year
+                                    </option>
+                                    <option value="quater">Quarter</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Main content starts here  -->
+            <div class="row main-section"
+                 style="margin-left: 0; margin-right: 10px;">
+                <!--  Lead Tile  -->
+                <div class="row w-100 mx-auto">
+                    <div id="leads" t-on-click="redirectToLeads"
+                         class="col-md-2 col-sm-6 tot_tasks oh-payslip"
+                         style="padding: 30px;" role="button">
+                        <div class="oh-card"
+                             style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; height: 200px; border-radius: 10px; background-color: #f9f9f9; transition: transform 0.3s;">
+                            <div class="oh-card-body"
+                                 style="padding: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <div class="stat-widget-one"
+                                     style="text-align: center;">
+                                    <div class="stat-icon bg-mauve-light"
+                                         style="border-radius: 50%; width: 70px; height: 70px; background: #ff4d94; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                                        <i class="fa fa-tasks text-white"
+                                           style="font-size: 36px;"/>
+                                    </div>
+                                    <div class="stat_content"
+                                         style="text-align: center; font-weight: bold; padding-top: 10px;">
+                                        <div class="stat_count_lead"
+                                             style="font-size: 24px;">
+                                            <div id="my_lead"/>
+                                        </div>
+                                        <div class="stat-head"
+                                             style="font-size: 14px;">My Leads
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  Opportunity Tile  -->
+                    <div id="opportunity" t-on-click="redirectToOpportunity"
+                         class="col-md-2 col-sm-6 tot_tasks oh-payslip"
+                         style="padding: 30px;" role="button">
+                        <div class="oh-card"
+                             style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; height: 200px; border-radius: 10px; background-color: #f9f9f9; transition: transform 0.3s;">
+                            <div class="oh-card-body"
+                                 style="padding: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <div class="stat-widget-one"
+                                     style="text-align: center;">
+                                    <div class="stat-icon bg-mauve-light"
+                                         style="border-radius: 50%; width: 70px; height: 70px; background: yellow; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                                        <i class="fa fa-trophy text-dark"
+                                           style="font-size: 36px;"/>
+                                    </div>
+                                    <div class="stat-content"
+                                         style="text-align: center; font-weight: bold; padding-top: 10px;">
+                                        <div class="stat_count_opp"
+                                             style="font-size: 24px;">
+                                            <div id="my_opportunity"/>
+                                        </div>
+                                        <div class="stat-head"
+                                             style="font-size: 14px;">My
+                                            Opportunity
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  Expected Revenue  -->
+                    <div id="expected_revenue"
+                         class="col-md-2 col-sm-6 tot_tasks oh-payslip"
+                         style="padding: 30px;">
+                        <div class="oh-card"
+                             style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; height: 200px; border-radius: 10px; background-color: #f9f9f9; transition: transform 0.3s;">
+                            <div class="oh-card-body"
+                                 style="padding: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <div class="stat-widget-one"
+                                     style="text-align: center;">
+                                    <div class="stat-icon bg-mauve-light"
+                                         style="border-radius: 50%; width: 70px; height: 70px; background: #bf80ff; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                                        <i class="fa fa-usd text-white"
+                                           style="font-size: 36px;"/>
+                                    </div>
+                                    <div class="stat-content"
+                                         style="text-align: center; font-weight: bold; padding-top: 10px;">
+                                        <div class="stat_count_ex_rev"
+                                             style="font-size: 24px;">
+                                            <div id="revenue"/>
+                                        </div>
+                                        <div class="stat-head"
+                                             style="font-size: 14px;">Expected
+                                            Revenue
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <t t-if="isCrmManager and isCrmUser">
+                        <!--  Invoiced Amount  -->
+                        <div id="invoiced_revenue"
+                             class="col-md-2 col-sm-6 tot_tasks oh-payslip"
+                             style="padding: 30px;">
+                            <div class="oh-card"
+                                 style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; height: 200px; border-radius: 10px; background-color: #f9f9f9; transition: transform 0.3s;">
+                                <div class="oh-card-body"
+                                     style="padding: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <div class="stat-widget-one"
+                                         style="text-align: center;">
+                                        <div class="stat-icon bg-mauve-light"
+                                             style="border-radius: 50%; width: 70px; height: 70px; background: #bf80ff; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                                            <i class="fa fa-usd text-white"
+                                               style="font-size: 36px;"/>
+                                        </div>
+                                        <div class="stat-content"
+                                             style="text-align: center; font-weight: bold; padding-top: 10px;">
+                                            <div class="stat_count_ex_rev"
+                                                 style="font-size: 24px;">
+                                                <div id="invoiced_amount"/>
+                                            </div>
+                                            <div class="stat-head"
+                                                 style="font-size: 14px;">
+                                                Revenue
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <!--  Win Ratio  -->
+                    <div id="win_ratio"
+                         class="col-md-2 col-sm-6 tot_tasks oh-payslip"
+                         style="padding: 30px;">
+                        <div class="oh-card"
+                             style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; height: 200px; border-radius: 10px; background-color: #f9f9f9; transition: transform 0.3s;">
+                            <div class="oh-card-body"
+                                 style="padding: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <div class="stat-widget-one"
+                                     style="text-align: center;">
+                                    <div class="stat-icon bg-mauve-light"
+                                         style="border-radius: 50%; width: 70px; height: 70px; background: #bf80ff; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                                        <i class="fa fa-usd text-white"
+                                           style="font-size: 36px;"/>
+                                    </div>
+                                    <div class="stat-content"
+                                         style="font-weight: bold; padding-top: 10px;">
+                                        <div class="stat_count_win_ratio"
+                                             style="font-size: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;">
+                                            <div style="text-align: center;">
+                                                <h4 style="margin: 0; font-size: 16px;">
+                                                    Won:
+                                                </h4>
+                                                <span id="won"
+                                                      style="font-size: 20px; font-weight: normal;color:green;"/>
+                                            </div>
+                                            <div style="text-align: center;">
+                                                <h4 style="margin: 0; font-size: 16px;">
+                                                    Lost:
+                                                </h4>
+                                                <span id="lost"
+                                                      style="font-size: 20px; font-weight: normal;color:red;"/>
+                                            </div>
+                                        </div>
+                                        <div class="stat-head"
+                                             style="font-size: 14px; margin-top: 10px;">
+                                            <div style="font-size:15px;"><span id="winRatio"/>:<span id="lostRatio"/></div>
+                                            Win Ratio
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Bar Chart  -->
+                <div class="year_to_date_graph_div col-sm-12 col-md-6 my-4"
+                     style="max-height: 100vh; max-width:100vh;height:100px;width:500px">
+                    <div class="chart-container card-shadow" id="tiles">
+                        <div style="height:20px; max-height:20px; text-align:center;">
+                            <h2>Lost Opportunity/Lead</h2>
+                        </div>
+                        <div class="graph_canvas"
+                             style="margin-top: 30px; padding:20px;">
+                            <canvas id="bar_canvas"
+                                    height="200" width="263"
+                                    style="display: block; box-sizing: border-box; height: 300px; width: 328px;"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Pie Chart  -->
+                <div class="year_to_date_graph_div col-sm-12 col-md-6 my-4"
+                     style="max-height: 100vh; max-width:100vh;height: 400px;">
+                    <div class="chart-container card-shadow" id="tiles">
+                        <div style="height: 20px; max-height: 20px; text-align:center;">
+                            <h2>Activity Graph</h2>
+                        </div>
+                        <div class="graph_canvas"
+                             style="margin-top: 30px;">
+                            <canvas id="pie_canvas"
+                                    style="height: 400px; width: 400px"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Doughnut Chart  -->
+                <div class="year_to_date_graph_div col-sm-12 col-md-6 my-4"
+                     style="max-height: 100vh; max-width:100vh;">
+                    <div class="chart-container card-shadow" id="tiles">
+                        <div style="height: 20px; max-height: 20px; text-align:center;">
+                            <h2>Lead by medium</h2>
+                        </div>
+                        <div class="graph_canvas"
+                             style="margin-top: 30px;">
+                            <canvas id="doughnut_canvas"
+                                    style="height: 400px; width: 400px;"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Line Chart  -->
+                <div class="year_to_date_graph_div col-sm-12 col-md-6 my-4"
+                     style="max-height: 100vh; max-width:100vh;">
+                    <div class="chart-container card-shadow" id="tiles">
+                        <div style="height: 20px; max-height: 20px; text-align:center;">
+                            <h2>Leads by Campaign</h2>
+                        </div>
+                        <div class="graph_canvas"
+                             style="margin-top: 30px;">
+                            <canvas id="line_canvas"
+                                    style="height: 400px; width: 400px;"/>
+                        </div>
+                    </div>
+                </div>
+                <!--  Table Chart  -->
+                <div class="year_to_date_graph_div col-sm-12 col-md-6 my-4"
+                     style="max-height: 100vh; max-width:100vh; float:right;">
+                    <div class="chart-container card-shadow" id="tiles">
+                        <div style="height: 20px; max-height: 20px; text-align:center;">
+                            <h2>Lead by month</h2>
+                        </div>
+                        <div class="graph_canvas"
+                             style="margin-top: 30px; padding-bottom:20px">
+                            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 16px; font-family: Arial, sans-serif;">
+                                <tr>
+                                    <t t-foreach="state.monthList"
+                                       t-as="mon" t-key="mon[0]">
+                                        <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">
+                                            <t t-esc="mon"/>
+                                        </th>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t t-foreach="state.leadByMonth"
+                                       t-as="mon" t-key="mon[0]">
+                                        <td style="padding: 12px; border: 1px solid #ddd; text-align: center; background-color: #f9f9f9;">
+                                            <t t-esc="mon"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

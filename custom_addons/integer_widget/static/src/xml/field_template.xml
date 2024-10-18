@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <templates id="template" xml:space="preserve">
+    <t t-name="web.FloatToInteger">
+    <span t-if="props.readonly" t-esc="getNum" />
+        <input
+            t-else=""
+            t-att-id="props.id"
+            t-ref="numpadInteger"
+            t-att-type="props.inputType"
+            class="o_input"/>
+    </t>
+</templates>
