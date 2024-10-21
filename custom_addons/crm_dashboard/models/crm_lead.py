@@ -20,16 +20,9 @@ class CrmLead(models.Model):
         if not value:
             lead_domain.append(('user_id', '=', self.env.user.id))
             lost_domain.append(('user_id', '=', self.env.user.id))
-        print(lead_domain,"ddhvhg")
         leads = self.search(lead_domain)
         lost = self.search(lost_domain)
 
-        print(self.search_read([('company_id', '=', company_id.id),
-                                ('user_id', '=', self.env.user.id)], ['activity_type_id',
-                                                                      'activity_ids']))
-        print(self.search([('company_id', '=', company_id.id),
-                           ('user_id', '=', self.env.user.id),
-                           ('type', '=', 'lead')]))
         my_leads = leads.filtered(lambda r: r.type == 'lead')
         my_opportunity = leads.filtered(lambda r: r.type == 'opportunity')
         sale_order = 0
@@ -211,7 +204,6 @@ class CrmLead(models.Model):
             medium_month_campaign_domain.append(('user_id', '=', self.env.user.id))
         if filter_value == 'today':
             #tile data
-            print(today.isocalendar().week,"gygy")
             total_lead = self.search(lead_domain).filtered(
                 lambda r: (r.create_date.month == int(today.month) and
                            r.create_date.day == int(today.day) and
@@ -299,7 +291,6 @@ class CrmLead(models.Model):
             first_quater = [1, 2, 3, 4, 5, 6]
             second_quater = [7, 8, 9, 10, 11, 12]
             if today.month <= 6:
-                print("first")
                 total_lead = self.search(lead_domain).filtered(lambda r: r.create_date.month in first_quater)
                 total_lost = self.search(lost_domain).filtered(lambda r: r.create_date.month in first_quater)
                 # bar data
@@ -316,7 +307,6 @@ class CrmLead(models.Model):
                 total_month = self.search(medium_month_campaign_domain).filtered(
                     lambda r: r.create_date.month in first_quater)
             else:
-                print("second")
                 total_lead = self.search(lead_domain).filtered(lambda r: r.create_date.month in second_quater)
                 total_lost = self.search(lost_domain).filtered(lambda r: r.create_date.month in second_quater)
                 # bar data
@@ -342,7 +332,6 @@ class CrmLead(models.Model):
         for i in my_opportunity.order_ids:
             sale_order += self.env['sale.order'].browse(i.ids).amount_invoiced
         won = leads.filtered(lambda r: r.stage_id.id == 4)
-        print(len(won))
         gcd = math.gcd(len(won), len(lost))  # greatest common division
         win_ratio = []
         if len(won) > 0 and len(lost) > 0:
@@ -351,7 +340,6 @@ class CrmLead(models.Model):
         else:
             win_ratio.append(len(won))
             win_ratio.append(len(lost))
-        print(win_ratio)
         currency = company_id.currency_id.symbol
         expected_revenue = sum(my_opportunity.mapped('expected_revenue'))
 

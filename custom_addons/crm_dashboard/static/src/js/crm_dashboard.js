@@ -91,19 +91,34 @@ class CrmDashboard extends Component {
                data: {
                   labels: ['Lead', 'Opportunity'], // X-axis labels
                   datasets: [{
-                      data: [result.lost_leads, result.lost_opportunity], // Y-axis data
+                      data: [result.lost_leads, null], // Y-axis data
                       backgroundColor: [
                           '#CC0033', '#0033CC ', '#00CC33 ',
                           '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
                           '#99CC00', '#FFFF33 ', '#FFFF33',
                       ],
-                      label:'',
+                      label:'Lead',
                       borderColor: [
                          '#CC0033', '#0033CC ', '#00CC33 ',
                          '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
                          '#99CC00', '#FFFF33 ', '#FFFF33',
                       ],
                       borderWidth: 1
+                  },{
+                   label:'Opportunity',
+                   data: [null, result.lost_opportunity], // Y-axis data
+                      backgroundColor: [
+                          '#0033CC', '#0033CC ', '#00CC33 ',
+                          '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                          '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      borderColor: [
+                         '#0033CC', '#0033CC ', '#00CC33 ',
+                         '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                         '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      borderWidth: 1
+
                   }]
                },
                options: {
@@ -212,7 +227,7 @@ class CrmDashboard extends Component {
             this.lineChart.destroy()
          }
          this.lineChart = new Chart(ctx, {
-            type: 'line',
+            type: 'polarArea',
             data: {
                labels:  result.campaign_name, // X-axis labels
                datasets: [{
@@ -314,23 +329,38 @@ class CrmDashboard extends Component {
              this.barChart = new Chart(ctx, {
              type: 'bar', // Choose the chart type (bar, line, pie, etc.)
              data: {
-                   labels: ['Lead', 'Opportunity'], // X-axis labels
-                   datasets: [{
-                   data: [result.lost_leads, result.lost_opportunity], // Y-axis data
-                   backgroundColor: [
-                       '#CC0033', '#0033CC ', '#00CC33 ',
-                       '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
-                       '#99CC00', '#FFFF33 ', '#FFFF33',
-                   ],
-                   label:'',
-                   borderColor: [
-                       '#CC0033', '#0033CC ', '#00CC33 ',
-                       '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
-                       '#99CC00', '#FFFF33 ', '#FFFF33',
-                   ],
-                   borderWidth: 1
-             }]
-          },
+                  labels: ['Lead', 'Opportunity'], // X-axis labels
+                  datasets: [{
+                      data: [result.lost_leads, null], // Y-axis data
+                      backgroundColor: [
+                          '#CC0033', '#0033CC ', '#00CC33 ',
+                          '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                          '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      label:'Lead',
+                      borderColor: [
+                         '#CC0033', '#0033CC ', '#00CC33 ',
+                         '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                         '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      borderWidth: 1
+                  },{
+                   label:'Opportunity',
+                   data: [null, result.lost_opportunity], // Y-axis data
+                      backgroundColor: [
+                          '#0033CC', '#0033CC ', '#00CC33 ',
+                          '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                          '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      borderColor: [
+                         '#0033CC', '#0033CC ', '#00CC33 ',
+                         '#FF0000', '#00FFFF ', '#660066 ', '#990000 ',
+                         '#99CC00', '#FFFF33 ', '#FFFF33',
+                      ],
+                      borderWidth: 1
+
+                  }]
+               },
           options: {
                scales: {
                      y: {
@@ -401,7 +431,7 @@ class CrmDashboard extends Component {
         }
        // Create a chart
        this.lineChart = new Chart(ctx, {
-           type: 'line',
+           type: 'polarArea',
            data: {
                labels: result.campaign_name, // X-axis labels
                datasets: [{
