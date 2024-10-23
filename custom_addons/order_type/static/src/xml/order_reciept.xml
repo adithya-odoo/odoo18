@@ -3,11 +3,10 @@
    <t t-name="order_type.OrderReceipt"
       t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
         <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
-             <t t-log="props,'ytgygg'"/>
-           <t t-if="props.data.orderType">
+            <t t-if="props.data.orderType">
                <div>Order Type:
-               <t t-esc='props.data.orderType'/>
-                               </div>
+                    <t t-esc='props.data.orderType'/>
+               </div>
            </t>
        </xpath>
    </t>

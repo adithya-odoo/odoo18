@@ -2,7 +2,7 @@
 <odoo>
     <record model="ir.ui.view" id="order_type.list">
         <field name="name">order type list</field>
-        <field name="model">order.type</field>
+        <field name="model">pos.order.type</field>
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
@@ -12,7 +12,7 @@
 
     <record model="ir.actions.act_window" id="order_type.action_window">
         <field name="name">order_type</field>
-        <field name="res_model">order.type</field>
+        <field name="res_model">pos.order.type</field>
         <field name="view_mode">list,form</field>
     </record>
 

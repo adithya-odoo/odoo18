@@ -18,7 +18,7 @@
             'order_type/static/src/xml/order_type.xml',
             'order_type/static/src/xml/order_reciept.xml',
             'order_type/static/src/js/order_type.js',
-            'order_type/static/src/js/order.js',
+            'order_type/static/src/js/order_reciept.js',
             ],
     },
     'license': 'LGPL-3',
