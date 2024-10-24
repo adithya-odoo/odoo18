@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="quality_assurance_tree_view" model="ir.ui.view">
+        <field name="name">quality.assurance.tree.view</field>
+        <field name="model">quality.assurance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="product_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="quality_assurance_form_view" model="ir.ui.view">
+        <field name="name">quality.assurance.form.view</field>
+        <field name="model">quality.assurance</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="trigger_ids" widget="subtask_one2many">
+                        <list editable="bottom">
+                            <field name="operation_type_id"/>
+                            <field name="warehouse_id"/>
+                        </list>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_assurance_action" model="ir.actions.act_window">
+        <field name="name">Quality Assurance</field>
+        <field name="res_model">quality.assurance</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+    <menuitem id="quality_assurance_menu" name="Quality Assurance"
+              action="quality_assurance_action"/>
+</odoo>

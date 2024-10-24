@@ -9,7 +9,7 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
+        'views/order_type_view.xml',
         'views/settings.xml',
         'views/pos_order.xml',
     ],
