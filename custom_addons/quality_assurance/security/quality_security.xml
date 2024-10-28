@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="category_quality_assurance" model="ir.module.category">
+            <field name="name">Quality</field>
+            <field name="description">Helps you manage your quality assurance processes</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="group_quality_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="category_quality_assurance"/>
+        </record>
+
+        <record id="group_quality_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="category_quality_assurance"/>
+            <field name="implied_ids" eval="[Command.link(ref('group_quality_user'))]"/>
+        </record>
+
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id"
+                   eval="[Command.link(ref('quality_assurance.group_quality_user'))]"/>
+        </record>
+
+        <record id="group_quality_user_visibility" model="ir.rule">
+            <field name="name">User can only see his/her data</field>
+            <field name="model_id" ref="model_quality_test"/>
+            <field name="groups"
+                   eval="[Command.link(ref('group_quality_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[('test_user_id','=',user.partner_id.id)]</field>
+        </record>
+
+         <record id="group_quality_manager_visibility" model="ir.rule">
+        <field name="name">Manager has all rights</field>
+        <field name="model_id" ref="model_quality_test"/>
+        <field name="groups"
+               eval="[Command.link(ref('group_quality_manager'))]"/>
+    </record>
+</odoo>

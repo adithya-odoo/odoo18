@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="quality_test_list" model="ir.ui.view">
+            <field name="name">quality.test.list</field>
+            <field name="model">quality.test</field>
+            <field name="arch" type="xml">
+                <list string="Quality Tests">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="test_status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="quality_test_form" model="ir.ui.view">
+            <field name="name">quality.test.form</field>
+            <field name="model">quality.test</field>
+            <field name="arch" type="xml">
+                <form string="Quality Test">
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name" placeholder="Name" readonly="1"/></h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="test_result" />
+                                <field name="test_result2"/>
+                                <field name="test_status"/>
+                            </group>
+                            <group>
+                                <field name="quality_measure"/>
+                                <field name="alert_id"/>
+                                <field name="product_id"/>
+                                <field name="test_user_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="quality_test_action">
+            <field name="name">Quality Tests</field>
+            <field name="res_model">quality.test</field>
+            <field name="view_mode">list,form,kanban</field>
+        </record>
+         <menuitem id="menu_quality_test" name="Quality Tests" parent="menu_quality_assurance" action="quality_test_action"/>
+</odoo>

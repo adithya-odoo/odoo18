@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <record id="sequence_quality_alert" model="ir.sequence">
+            <field name="name">Quality alert sequence</field>
+            <field name="code">quality.reference</field>
+            <field name="prefix">QA</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+     </record>
+
+     <record id="quality_alert_list" model="ir.ui.view">
+            <field name="name">quality.alert.list</field>
+            <field name="model">quality.alert</field>
+            <field name="arch" type="xml">
+                <list string="Quality Alerts">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="origin"/>
+                    <field name="date"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="quality_alert_form" model="ir.ui.view">
+            <field name="name">quality.alert.form</field>
+            <field name="model">quality.alert</field>
+            <field name="arch" type="xml">
+                <form string="Quality Alert">
+                    <header>
+                        <button name="generate_tests" string="Generate Tests" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name" placeholder="Name" readonly="1"/></h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <!--<field name="origin"/>-->
+                                <field name="picking_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Tests">
+                                <field name="tests">
+                                    <list create="false" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="test_user_id"/>
+                                        <field name="test_result" string="Quantitative Result"/>
+                                        <field name="test_result2" string="Qualitative Result"/>
+                                        <field name="test_status"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="quality_alert_action">
+            <field name="name">Quality Alerts</field>
+            <field name="res_model">quality.alert</field>
+            <field name="view_mode">list,form,kanban</field>
+        </record>
+
+        <menuitem id="menu_quality_alert" name="Quality Alerts" parent="menu_quality_assurance" action="quality_alert_action"/>
+</odoo>

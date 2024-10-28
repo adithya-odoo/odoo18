@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "Quality Assurance",
+    'name': 'Quality Assurance',
     'version': '18.0.1.0.0',
+    'installable': True,
     'application': True,
 
     'depends': ['base',
-                'purchase',
-                'stock'],
-
+                'product',
+                'stock',
+                'purchase'],
     'data': [
+        'security/quality_security.xml',
         'security/ir.model.access.csv',
-        'views/quality_assurance.xml',
-        'views/quality_alert.xml'
+        'views/quality_measure_view.xml',
+        'views/quality_alert_view.xml',
+        'views/quality_test_view.xml',
+        'views/stock_view.xml',
     ],
     'license': 'LGPL-3',
 }
-
