@@ -39,7 +39,6 @@ class StockPicking(models.Model):
         '''This function will generate validation error if quality alert is
            failed or in waiting status'''
         res = super().button_validate()
-        print(self.move_ids.product_id)
         for line in self.move_ids:
             for alert in self.env['quality.alert'].search(
                 [('picking_id', '=', self.id),

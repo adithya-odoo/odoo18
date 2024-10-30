@@ -10,6 +10,7 @@ class QualityAlert(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char('Name', required=True)
+    quality_measure = fields.Many2one('quality.measure', string='Measure', ondelete='cascade', tracking=True)
     date = fields.Datetime(string='Date', default=datetime.now(),
                            tracking=True)
     product_id = fields.Many2one('product.product', string='Product')
@@ -18,6 +19,7 @@ class QualityAlert(models.Model):
     user_id = fields.Many2one('res.users', string='Created by',
                               default=lambda self: self.env.user.id)
     tests = fields.One2many('quality.test', 'alert_id', string="Tests")
+    test_type = fields.Selection('Type', related='quality_measure.type', readonly=True)
     final_status = fields.Selection(compute="_compute_status",
                                     selection=[('wait', 'Waiting'),
                                                ('pass', 'Passed'),
